@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Borna Relic\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Borna Relic\\.nuget\\packages"
+    ]
+  }
+}

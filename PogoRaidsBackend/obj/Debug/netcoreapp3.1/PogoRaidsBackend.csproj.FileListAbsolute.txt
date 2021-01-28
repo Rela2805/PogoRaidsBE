@@ -1,0 +1,9 @@
+C:\Users\Borna Relic\Documents\Faks\PogoRaids\PogoRaidsBackend\bin\Debug\netcoreapp3.1\PogoRaidsBackend.deps.json
+C:\Users\Borna Relic\Documents\Faks\PogoRaids\PogoRaidsBackend\bin\Debug\netcoreapp3.1\PogoRaidsBackend.dll
+C:\Users\Borna Relic\Documents\Faks\PogoRaids\PogoRaidsBackend\bin\Debug\netcoreapp3.1\PogoRaidsBackend.pdb
+C:\Users\Borna Relic\Documents\Faks\PogoRaids\PogoRaidsBackend\obj\Debug\netcoreapp3.1\PogoRaidsBackend.csprojAssemblyReference.cache
+C:\Users\Borna Relic\Documents\Faks\PogoRaids\PogoRaidsBackend\obj\Debug\netcoreapp3.1\PogoRaidsBackend.AssemblyInfoInputs.cache
+C:\Users\Borna Relic\Documents\Faks\PogoRaids\PogoRaidsBackend\obj\Debug\netcoreapp3.1\PogoRaidsBackend.AssemblyInfo.cs
+C:\Users\Borna Relic\Documents\Faks\PogoRaids\PogoRaidsBackend\obj\Debug\netcoreapp3.1\PogoRaidsBackend.csproj.CoreCompileInputs.cache
+C:\Users\Borna Relic\Documents\Faks\PogoRaids\PogoRaidsBackend\obj\Debug\netcoreapp3.1\PogoRaidsBackend.dll
+C:\Users\Borna Relic\Documents\Faks\PogoRaids\PogoRaidsBackend\obj\Debug\netcoreapp3.1\PogoRaidsBackend.pdb

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PogoRaids.API", "PogoRaids.API\PogoRaids.API.csproj", "{49A07051-4BB1-498B-9ADF-E5F547C83ED3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PogoRaidsBackend", "PogoRaidsBackend\PogoRaidsBackend.csproj", "{CD43405D-5B2F-430E-9463-EEF25C4151AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49A07051-4BB1-498B-9ADF-E5F547C83ED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49A07051-4BB1-498B-9ADF-E5F547C83ED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49A07051-4BB1-498B-9ADF-E5F547C83ED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49A07051-4BB1-498B-9ADF-E5F547C83ED3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD43405D-5B2F-430E-9463-EEF25C4151AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD43405D-5B2F-430E-9463-EEF25C4151AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD43405D-5B2F-430E-9463-EEF25C4151AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD43405D-5B2F-430E-9463-EEF25C4151AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {25619858-42E9-432D-B1D4-42B47FAE2608}
+	EndGlobalSection
+EndGlobal
