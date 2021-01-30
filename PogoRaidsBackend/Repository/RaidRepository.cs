@@ -14,7 +14,7 @@ namespace PogoRaidsBackend.Repository
         {
             this.helper = helper;
         }
-        public RaidDataModel AddUserToContenders(long raidId, UserDataModel userModel)
+        public void AddUserToContenders(long raidId, long userId)
         {
             using (var session = helper.OpenSession())
             {
@@ -22,13 +22,21 @@ namespace PogoRaidsBackend.Repository
                 {
                     try
                     {
-                        var raidModel = this.Get(raidId);
+                        var raidModel = session.Query<RaidDataModel>().ToList().Where(x => x.Id == raidId && x.Creator.Id != userId).First();
+                        var userModel = session.Query<UserDataModel>().ToList().Where(x => x.Id == userId).First();
+
+                        if (raidModel.Contendors.Count == 5 || raidModel.Contendors.Contains(userModel))
+                        {
+                            return;
+                        }
+
                         raidModel.Contendors.Add(userModel);
                         userModel.ParticipatedRaids.Add(raidModel);
+                        userModel.RaidsCompleted += 1;
 
-                        session.SaveOrUpdate(raidModel);
+                        session.Update(raidModel);
+                        session.Update(userModel);
                         transaction.Commit();
-                        return raidModel;
                     }
                     catch (Exception e)
                     {
@@ -38,26 +46,37 @@ namespace PogoRaidsBackend.Repository
             }
         }
 
-        public void Delete(long id)
+        public void Delete(long raidId, long userId)
         {
             using (var session = helper.OpenSession())
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    var raidModel = this.Get(id);
-                    var pokemonModel = raidModel.Pokemon;
-                    pokemonModel.Raids.Remove(raidModel);
-                    var creator = raidModel.Creator;
-                    creator.CreatedRaids.Remove(raidModel);
-                    var contenders = raidModel.Contendors;
-
-                    foreach(var contender in contenders)
+                    try
                     {
-                        contender.ParticipatedRaids.Remove(raidModel);
-                    }
+                        var raidModel = session.Query<RaidDataModel>().ToList().Where(x => x.Id == raidId && x.Creator.Id == userId).First();
+                        var pokemonModel = raidModel.Pokemon;
+                        pokemonModel.Raids.Remove(raidModel);
+                        var creator = raidModel.Creator;
+                        creator.CreatedRaids.Remove(raidModel);
+                        var contenders = raidModel.Contendors;
 
-                    session.Delete(raidModel);
-                    transaction.Commit();
+                        foreach (var contender in contenders)
+                        {
+                            contender.ParticipatedRaids.Remove(raidModel);
+                        }
+
+                        raidModel.Contendors = new List<UserDataModel>();
+                        raidModel.Creator = null;
+                        raidModel.Pokemon = null;
+
+                        session.Delete(raidModel);
+                        transaction.Commit();
+                    }
+                    catch (Exception e)
+                    {
+                        throw e.InnerException ?? e;
+                    }
                 }
             }
         }
@@ -81,7 +100,7 @@ namespace PogoRaidsBackend.Repository
             return session.Query<RaidDataModel>().ToList();
         }
 
-        public RaidDataModel RemoveUserFromContenders(long raidId, long userId)
+        public void RemoveUserFromContenders(long raidId, long userId)
         {
             using (var session = helper.OpenSession())
             {
@@ -89,14 +108,15 @@ namespace PogoRaidsBackend.Repository
                 {
                     try
                     {
-                        var raidModel = this.Get(raidId);
+                        var raidModel = session.Query<RaidDataModel>().ToList().Where(x => x.Id == raidId).First();
                         var user = raidModel.Contendors.Where(x => x.Id == userId).First();
                         raidModel.Contendors.Remove(user);
                         user.ParticipatedRaids.Remove(raidModel);
+                        user.RaidsCompleted = Math.Max(0, user.RaidsCompleted - 1);
 
-                        session.SaveOrUpdate(raidModel);
+                        session.Update(raidModel);
+                        session.Update(user);
                         transaction.Commit();
-                        return raidModel;
                     }
                     catch (Exception e)
                     {

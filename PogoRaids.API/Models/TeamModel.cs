@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PogoRaidsBackend.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,18 +8,12 @@ namespace PogoRaids.API.Models
 {
     public class TeamModel
     {
-        public TeamModel(string color)
+        public TeamModel(TeamDataModel model)
         {
-            Id = 0;
-            Color = color;
+            Id = model.Id;
+            Color = model.Color;
         }
-        public TeamModel()
-        {
-            Id = 0;
-            Color = "blue";
-        }
-
-        public virtual long Id { get; set; }
-        public virtual string Color { get; set; }
+        public long Id { get; set; }
+        public string Color { get; set; }
     }
 }

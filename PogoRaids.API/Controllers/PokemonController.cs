@@ -24,19 +24,19 @@ namespace PogoRaids.API.Controllers
         }
 
         [HttpGet("/pokemon/{id}")]
-        public PokemonDataModel GetPokemon(long id)
+        public PokemonModel GetPokemon(long id)
         {
             return service.Get(id);
         }
 
         [HttpGet("/pokemon/all")]
-        public IList<PokemonDataModel> GetAll()
+        public IList<PokemonModel> GetAll()
         {
             return service.GetAll();
         }
 
         [HttpPost("/pokemon")]
-        public PokemonDataModel Create(PokemonDOM pokemon)
+        public PokemonModel Create(PokemonDOM pokemon)
         {
             return service.Save(pokemon);
         }

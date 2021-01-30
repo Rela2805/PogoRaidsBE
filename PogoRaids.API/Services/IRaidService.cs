@@ -1,4 +1,5 @@
 ﻿using PogoRaids.API.DOMModels;
+using PogoRaids.API.Models;
 using PogoRaidsBackend.Domain;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,11 @@ namespace PogoRaids.API.Services
 {
     public interface IRaidService
     {
-        RaidDataModel Save(RaidDOM raidModel);
-        IList<RaidDataModel> GetAll();
-        void Delete(long id);
-        RaidDataModel Get(long id);
-        RaidDataModel AddUserToContenders(long raidId, long userId);
-        RaidDataModel RemoveUserFromContenders(long raidId, long userId);
+        RaidModel Save(RaidDOM raidModel);
+        IList<RaidModel> GetAll();
+        void Delete(long raidId, long userId);
+        RaidModel Get(long id);
+        void AddUserToContenders(long raidId, long userId);
+        void RemoveUserFromContenders(long raidId, long userId);
     }
 }

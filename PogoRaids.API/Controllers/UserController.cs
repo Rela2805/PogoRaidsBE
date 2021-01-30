@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PogoRaids.API.DOMModels;
+using PogoRaids.API.Models;
+using PogoRaids.API.Services;
 using PogoRaidsBackend.Domain;
 using PogoRaidsBackend.Repository;
 using System;
@@ -14,33 +16,48 @@ namespace PogoRaids.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private IUserRepository userRepository;
-        private ITeamRepository teamRepository;
-        public UserController(IUserRepository userRepository, ITeamRepository teamRepository)
+        private IUserService Service;
+        public UserController(IUserService Service)
         {
-            this.userRepository = userRepository;
-            this.teamRepository = teamRepository;
+            this.Service = Service;
         }
         [HttpGet("/user/all")]
-        public IList<UserDataModel> GetAll()
+        public IList<UserModel> GetAll()
         {
-            return userRepository.GetAll();
+            return Service.GetAll();
         }
 
         [HttpGet("/user/{id}")]
-        public UserDataModel GetRaid(long id)
+        public UserModel GetUser(long id)
         {
-            return userRepository.Get(id);
+            return Service.Get(id);
         }
 
-        [HttpPost("/user")]
-        public UserDataModel Create(UserDOM model)
+        [HttpPost("/user/register")]
+        public UserModel Create(UserDOM model)
         {
-            var team = teamRepository.GetByColor(model.Color);
-            var user = new UserDataModel { Name = model.Name, Email = model.Email, GameCode = model.GameCode, GameNickname = model.GameNickname, Level = model.Level, Password = model.Password, Surname = model.Surname, Username = model.Username, Team = team, RaidsCompleted = 0 };
-            team.Members.Add(user);
+            return Service.Create(model);
+        }
+        [HttpGet("/user/login")]
+        public UserModel LogIn(string password, string email)
+        {
+            return Service.Login(password, email);
+        }
+        [HttpDelete("/user/{id}")]
+        public void Delete(long id)
+        {
+            Service.Delete(id);
+        }
 
-            return userRepository.Save(user);
+        [HttpPatch("/user/{id}")]
+        public void Update(long id, [FromBody] UserDOM model)
+        {
+            Service.Update(id, model);
+        }
+        [HttpGet("/user/active")]
+        public IList<UserModel> GetMostActive()
+        {
+            return Service.GetMostActive();
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PogoRaids.API.DOMModels;
+using PogoRaids.API.Models;
+using PogoRaids.API.Services;
 using PogoRaidsBackend.Domain;
 using PogoRaidsBackend.Repository;
 using System;
@@ -14,36 +16,35 @@ namespace PogoRaids.API.Controllers
     [ApiController]
     public class TeamController : ControllerBase
     {
-        private ITeamRepository repository;
+        private ITeamService service;
 
-        public TeamController(ITeamRepository repository)
+        public TeamController(ITeamService service)
         {
-            this.repository = repository;
+            this.service = service;
         }
 
         [HttpGet("/team/{id}")]
-        public TeamDataModel GetTeam(long id)
+        public TeamModel GetTeam(long id)
         {
-            return repository.Get(id);
+            return service.Get(id);
         }
 
         [HttpGet("/team/all")]
-        public IList<TeamDataModel> GetAll()
+        public IList<TeamModel> GetAll()
         {
-            return repository.GetAll();
+            return service.GetAll();
         }
 
         [HttpPost("/team")]
-        public TeamDataModel Create(TeamColorDOM teamModel)
+        public TeamModel Create(TeamColorDOM teamModel)
         {
-            var team = new TeamDataModel() { Color = teamModel.Color };
-            return repository.Save(team);
+            return service.Create(teamModel);
         }
 
         [HttpDelete("/team/{id}")]
         public void Delete(long id)
         {
-            repository.Delete(id);
+            service.Delete(id);
         }
 
     }

@@ -3,26 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using PogoRaidsBackend.Domain;
 
 namespace PogoRaids.API.Models
 {
     public class DifficultyModel
     {
-        public DifficultyModel()
+        public DifficultyModel(DifficultyDataModel model)
         {
-            this.Id = 1;
-            this.Level = 1;
+            Id = model.Id;
+            Level = model.Level;
         }
-
-        public DifficultyModel(long id, int level)
-        {
-            Id = id;
-            Level = level;
-        }
-
-        [JsonProperty("id")]
         public long Id { get; set; }
-        [JsonProperty("level")]
         public int Level { get; set; }
     }
 }

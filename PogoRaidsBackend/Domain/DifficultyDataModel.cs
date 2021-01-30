@@ -9,7 +9,6 @@ namespace PogoRaidsBackend.Domain
     {
         public virtual long Id { get; protected set; }
         public virtual int Level { get; set; }
-        [JsonIgnore]
         public virtual IList<PokemonDataModel> Pokemons { get; set; }
         public DifficultyDataModel()
         {

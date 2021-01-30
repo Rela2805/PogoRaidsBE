@@ -22,21 +22,36 @@ namespace PogoRaids.API.Controllers
         }
 
         [HttpGet("/raid/all")]
-        public IList<RaidDataModel> GetAll()
+        public IList<RaidModel> GetAll()
         {
             return service.GetAll();
         }
 
         [HttpGet("/raid/{id}")]
-        public RaidDataModel GetRaid(long id)
+        public RaidModel GetRaid(long id)
         {
             return service.Get(id);
         }
 
         [HttpPost("/raid")]
-        public RaidDataModel Create(RaidDOM model)
+        public RaidModel Create(RaidDOM model)
         {
             return service.Save(model);
+        }
+        [HttpDelete("/raid/{raidId}/{userId}")]
+        public void Delete(long raidId, long userId)
+        {
+            service.Delete(raidId, userId);
+        }
+        [HttpPatch("/raid/join/{raidId}/{userId}")]
+        public void JoinRaid(long raidId, long userId)
+        {
+            service.AddUserToContenders(raidId, userId);
+        }
+        [HttpPatch("/raid/leave/{raidId}/{userId}")]
+        public void LeaveRaid(long raidId, long userId)
+        {
+            service.RemoveUserFromContenders(raidId, userId);
         }
     }
 }

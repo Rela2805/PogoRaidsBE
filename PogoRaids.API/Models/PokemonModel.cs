@@ -3,34 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using PogoRaidsBackend.Domain;
 
 namespace PogoRaids.API.Models
 {
     public class PokemonModel
     {
-        public PokemonModel()
+        public PokemonModel(PokemonDataModel model)
         {
-            this.Id = 10;
-            this.Name = "None";
-            this.ImageId = "None";
-            this.Difficulty = new DifficultyModel();
+            Id = model.Id;
+            Name = model.Name;
+            ImageId = model.ImageId;
+            Difficulty = new DifficultyModel(model.Difficulty);
         }
-
-        public PokemonModel(long id, string name, string imageId, DifficultyModel difficulty)
-        {
-            Id = id;
-            Name = name;
-            ImageId = imageId;
-            Difficulty = difficulty;
-        }
-
-        [JsonProperty("id")]
         public long Id { get; set; }
-        [JsonProperty("name")]
         public string Name { get; set; }
-        [JsonProperty("imageId")]
         public string ImageId { get; set; }
-        [JsonProperty("difficulty")]
         public DifficultyModel Difficulty { get; set; }
     }
 }

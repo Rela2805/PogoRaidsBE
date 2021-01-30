@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PogoRaids.API.DOMModels;
+using PogoRaids.API.Models;
+using PogoRaids.API.Services;
 using PogoRaidsBackend.Domain;
 using PogoRaidsBackend.Repository;
 using System;
@@ -14,36 +16,35 @@ namespace PogoRaids.API.Controllers
     [ApiController]
     public class DifficultyController : ControllerBase
     {
-        private IDifficultyRepository repository;
+        private IDifficultyService service;
 
-        public DifficultyController(IDifficultyRepository repository)
+        public DifficultyController(IDifficultyService service)
         {
-            this.repository = repository;
+            this.service = service;
         }
 
         [HttpGet("/difficulty/{id}")]
-        public DifficultyDataModel GetTeam(long id)
+        public DifficultyModel GetDifficulty(long id)
         {
-            return repository.Get(id);
+            return service.Get(id);
         }
 
         [HttpGet("/difficulty/all")]
-        public IList<DifficultyDataModel> GetAll()
+        public IList<DifficultyModel> GetAll()
         {
-            return repository.GetAll();
+            return service.GetAll();
         }
 
         [HttpPost("/difficulty")]
-        public DifficultyDataModel Create(DifficultyLevelDOM difficultyModel)
+        public DifficultyModel Create(DifficultyLevelDOM difficultyModel)
         {
-            var difficulty = new DifficultyDataModel() { Level = difficultyModel.Level };
-            return repository.Save(difficulty);
+            return service.Create(difficultyModel);
         }
 
         [HttpDelete("/difficulty/{id}")]
         public void Delete(long id)
         {
-            repository.Delete(id);
+            service.Delete(id);
         }
     }
 }

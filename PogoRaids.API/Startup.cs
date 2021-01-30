@@ -31,13 +31,17 @@ namespace PogoRaids.API
         {
             services.AddControllers();
             services.AddSingleton<INHibernateHelper, DatabaseNHibernateHelper>();
-            services.AddSingleton<ITeamRepository, TeamRepository>();
-            services.AddSingleton<IDifficultyRepository, DifficultyRepository>();
-            services.AddSingleton<IPokemonRepository, PokemonRepository>();
-            services.AddSingleton<IRaidRepository, RaidRepository>();
-            services.AddSingleton<IUserRepository, UserRepository>();
-            services.AddSingleton<IPokemonService, PokemonService>();
-            services.AddSingleton<IRaidService, RaidService>();
+            services.AddTransient<ITeamRepository, TeamRepository>();
+            services.AddTransient<IDifficultyRepository, DifficultyRepository>();
+            services.AddTransient<IPokemonRepository, PokemonRepository>();
+            services.AddTransient<IRaidRepository, RaidRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IPokemonService, PokemonService>();
+            services.AddTransient<IRaidService, RaidService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ITeamService, TeamService>();
+            services.AddTransient<IDifficultyService, DifficultyService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

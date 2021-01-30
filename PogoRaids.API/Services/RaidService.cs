@@ -1,4 +1,5 @@
 ﻿using PogoRaids.API.DOMModels;
+using PogoRaids.API.Models;
 using PogoRaidsBackend.Domain;
 using PogoRaidsBackend.Repository;
 using System;
@@ -19,32 +20,32 @@ namespace PogoRaids.API.Services
             this.userRepository = userRepository;
             this.pokemonRepository = pokemonRepository;
         }
-        public RaidDataModel AddUserToContenders(long raidId, long userId)
+        public void AddUserToContenders(long raidId, long userId)
         {
-            throw new NotImplementedException();
+            raidRepository.AddUserToContenders(raidId, userId);
         }
 
-        public void Delete(long id)
+        public void Delete(long raidId, long userId)
         {
-            throw new NotImplementedException();
+            raidRepository.Delete(raidId, userId);
         }
 
-        public RaidDataModel Get(long id)
+        public RaidModel Get(long id)
         {
-            return raidRepository.Get(id);
+            return new RaidModel(raidRepository.Get(id));
         }
 
-        public IList<RaidDataModel> GetAll()
+        public IList<RaidModel> GetAll()
         {
-            return raidRepository.GetAll();
+            return raidRepository.GetAll().Select(x => new RaidModel(x)).ToList();
         }
 
-        public RaidDataModel RemoveUserFromContenders(long raidId, long userId)
+        public void RemoveUserFromContenders(long raidId, long userId)
         {
-            throw new NotImplementedException();
+            raidRepository.RemoveUserFromContenders(raidId, userId);
         }
 
-        public RaidDataModel Save(RaidDOM raidModel)
+        public RaidModel Save(RaidDOM raidModel)
         {
             var pokemon = pokemonRepository.GetByName(raidModel.PokemonName);
             var creator = userRepository.Get(raidModel.CreatorId);
@@ -52,7 +53,7 @@ namespace PogoRaids.API.Services
             creator.CreatedRaids.Add(raid);
             pokemon.Raids.Add(raid);
 
-            return raidRepository.Save(raid);
+            return new RaidModel(raidRepository.Save(raid));
         }
     }
 }

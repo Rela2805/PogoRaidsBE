@@ -9,9 +9,9 @@ namespace PogoRaidsBackend.Repository
     {
         RaidDataModel Save(RaidDataModel raidModel);
         IList<RaidDataModel> GetAll();
-        void Delete(long id);
+        void Delete(long raidId, long userId);
         RaidDataModel Get(long id);
-        RaidDataModel AddUserToContenders(long raidId, UserDataModel userModel);
-        RaidDataModel RemoveUserFromContenders(long raidId, long userId);
+        void AddUserToContenders(long raidId, long userId);
+        void RemoveUserFromContenders(long raidId, long userId);
     }
 }

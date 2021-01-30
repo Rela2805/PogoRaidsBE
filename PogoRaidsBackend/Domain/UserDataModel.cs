@@ -18,9 +18,7 @@ namespace PogoRaidsBackend.Domain
         public virtual string GameCode { get; set; }
         public virtual int Level { get; set; }
         public virtual TeamDataModel Team { get; set; }
-        [JsonIgnore]
         public virtual IList<RaidDataModel> CreatedRaids { get; set; }
-        [JsonIgnore]
         public virtual IList<RaidDataModel> ParticipatedRaids { get; set; }
 
         public UserDataModel()

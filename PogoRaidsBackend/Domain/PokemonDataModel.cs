@@ -11,7 +11,6 @@ namespace PogoRaidsBackend.Domain
         public virtual string Name { get; set; }
         public virtual string ImageId { get; set; }
         public virtual DifficultyDataModel Difficulty { get; set; }
-        [JsonIgnore]
         public virtual IList<RaidDataModel> Raids { get; set; }
 
         public PokemonDataModel()
